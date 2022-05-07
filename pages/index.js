@@ -75,18 +75,16 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const formatTime = time => {
-  return [
+  return time ? [
     ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][dayjs(time).day()],
     dayjs(time).hour() < 12 ? 'matin' : 'soir'
-  ].join` `;
+  ].join` ` : '?';
 }
 
 export default function Index() {
   const { classes, cx } = useStyles();
-  const defaultTime = dayjs().subtract(12, 'h');
   const timeFromCookieTry = getCookie('time');
-  timeFromCookieTry ?? setCookies('time', defaultTime.toJSON());
-  const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : defaultTime);
+  const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : null);
   const [formattedTime, setFormattedTime] = useState('');
 
   const feed = () => {
