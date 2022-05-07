@@ -1,6 +1,7 @@
 import { Button, createStyles, Overlay, Text, Title } from '@mantine/core';
+import { getCookie, setCookies } from 'cookies-next';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -82,7 +83,19 @@ const formatTime = time => {
 
 export default function Index() {
   const { classes, cx } = useStyles();
-  const [time, setTime] = useState(dayjs().subtract(12, 'h'));
+  const defaultTime = dayjs().subtract(12, 'h');
+  const timeFromCookieTry = getCookie('time');
+  timeFromCookieTry ?? setCookies('time', defaultTime.toJSON());
+  const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : defaultTime);
+  const [formattedTime, setFormattedTime] = useState('');
+
+  const feed = () => {
+    const now = dayjs();
+    setTime(now);
+    setCookies('time', now.toJSON());
+  }
+
+  useEffect(() => setFormattedTime(formatTime(time)), [time])
 
   return (
     <div className={classes.wrapper}>
@@ -92,12 +105,12 @@ export default function Index() {
         <Title className={classes.title}>
           Le chien a mangé{' '}
           <Text component="span" inherit className={classes.highlight}>
-            {formatTime(time)}
+            {formattedTime}
           </Text>
         </Title>
 
         <div className={classes.controls}>
-          <Button className={classes.control} variant="white" size="xl" onClick={() => setTime(dayjs())}>
+          <Button className={classes.control} variant="white" size="xl" onClick={feed}>
             <Text size='xl'>
               Nourrir le chien
             </Text>
