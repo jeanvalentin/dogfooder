@@ -1,34 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Healthy dog
 
-## Getting Started
+Should I feed the dog? Maybe someone else in the house fed the dog but I can't be bothered to ask everyone every time so whatever let's build an app for that.
 
-First, run the development server:
+Dogfooder is called Dogfooder because of [dogfooding](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) and also because it is actually about dog food.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## How it works
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Live: https://dogfooder.surge.sh/
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+See when the dog was last fed. When you feed the dog, tap the button and it stores the time in a cookie. Do not give cookies to the dog.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+It has a picture of my dog but it works for any dog.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## FAQ
 
-## Learn More
+__Q: Isn't Next.js a bit overkill for that kind of simple application?__
 
-To learn more about Next.js, take a look at the following resources:
+__A:__ Yes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+__Q: Isn't Mantine a bit overkill for that kind of simple application?__
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+__A:__ See above
 
-## Deploy on Vercel
+__Q: Why is it in French?__
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+__A:__ Oui
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
