@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "surge": "npx surge --domain dogfooder.surge.sh --project out/"
   },
   "dependencies": {
+    "@mantine/core": "^4.2.2",
+    "@mantine/hooks": "^4.2.2",
+    "@mantine/next": "^4.2.2",
+    "dayjs": "^1.11.2",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0"
