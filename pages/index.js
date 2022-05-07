@@ -41,10 +41,11 @@ const formatTime = time => {
 
 export default function Index() {
   const { classes } = useStyles();
-  const { height } = useViewportSize();
+  const { width, height } = useViewportSize();
   const timeFromCookieTry = getCookie('time');
   const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : null);
   const [formattedTime, setFormattedTime] = useState('');
+  const [viewportWidth, setViewportWidth] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
 
   const feed = () => {
@@ -55,9 +56,10 @@ export default function Index() {
 
   useEffect(() => setFormattedTime(formatTime(time)), [time])
   useEffect(() => setViewportHeight(height), [height])
+  useEffect(() => setViewportWidth(width), [width])
 
   return <>
-    <div className={classes.wrapper} style={{ height: viewportHeight }}>
+    <div className={classes.wrapper} style={{ width: viewportWidth, height: viewportHeight, overflow: 'hidden' }}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />
       <div className={classes.inner}>
         <Box style={{ height: viewportHeight / 5 }} />
