@@ -92,7 +92,7 @@ export default function Index() {
   const feed = () => {
     const now = dayjs();
     setTime(now);
-    setCookies('time', now.toJSON());
+    setCookies('time', now.toJSON(), { expires: now.add(30, 'd').toDate() });
   }
 
   useEffect(() => setFormattedTime(formatTime(time)), [time])
