@@ -7,7 +7,7 @@
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "surge": "npx surge --domain dogfooder.surge.sh out"
+    "surge": "npx surge --domain https://dogfooder.surge.sh out"
   },
   "dependencies": {
     "@mantine/core": "^4.2.2",
