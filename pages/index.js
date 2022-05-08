@@ -52,6 +52,12 @@ export default function Index() {
     setCookies('timeToken', newTimeToken, { expires: dayjs().add(30, 'd').toDate() });
   }
 
+  const unfeed = () => {
+    const oldTimeToken = getTimeToken(dayjs().subtract(12, 'h'));
+    setTimeToken(oldTimeToken);
+    setCookies('timeToken', oldTimeToken, { expires: dayjs().add(30, 'd').toDate() });
+  }
+
   useEffect(() => setFormattedTime(formatTime(timeToken)), [timeToken])
   useEffect(() => setViewportSize({ width, height }), [height, width])
 
@@ -77,7 +83,7 @@ export default function Index() {
               </Button>
             </Grid.Col>
             <Grid.Col span={6}>
-              <Button variant="outline" size="xl" onClick={null} style={{ width: '100%' }}>
+              <Button variant="outline" size="xl" onClick={unfeed} style={{ width: '100%' }}>
                 <Text size='xl'>En fait non</Text>
               </Button>
             </Grid.Col>
