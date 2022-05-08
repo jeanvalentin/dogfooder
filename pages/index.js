@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    backgroundImage: 'url(https://dogfooder.surge.sh/chien.jpg)',
+    backgroundImage: 'url(https://i.imgur.com/7Kqp1x6.jpeg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
