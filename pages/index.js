@@ -1,4 +1,4 @@
-import { Box, Button, createStyles, Overlay, Text, Title } from '@mantine/core';
+import { Box, Button, createStyles, Grid, Overlay, Text, Title } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { getCookie, setCookies } from 'cookies-next';
 import dayjs from 'dayjs';
@@ -70,11 +70,18 @@ export default function Index() {
         </Box>
         <Box style={{ height: viewportSize.height / 5 }} />
         <Box style={{ margin: 'auto', textAlign: 'center' }}>
-          <Button variant="white" size="xl" onClick={feed} px={100}>
-            <Text size='xl'>
-              Nourrir le chien
-            </Text>
-          </Button>
+          <Grid gutter='xl' px='xl'>
+            <Grid.Col span={6}>
+              <Button variant="white" size="xl" onClick={feed} style={{ width: '100%' }}>
+                <Text size='xl'>Nourrir le chien</Text>
+              </Button>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Button variant="outline" size="xl" onClick={null} style={{ width: '100%' }}>
+                <Text size='xl'>En fait non</Text>
+              </Button>
+            </Grid.Col>
+          </Grid>
         </Box>
       </div>
     </div>
