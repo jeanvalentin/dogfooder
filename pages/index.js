@@ -32,28 +32,27 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const formatTime = time => {
-  return time ? [
-    ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][dayjs(time).day()],
-    dayjs(time).hour() < 12 ? 'matin' : 'soir'
-  ].join` ` : '?';
-}
+const formatTime = timeToken => timeToken ? [
+  ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][timeToken - 2 >> 1],
+  ['matin', 'soir'][timeToken % 2]
+].join` ` : '?';
+
+const getTimeToken = time => dayjs(time).day() * 2 + (12 <= dayjs(time).hour()) * 1 + 2;
 
 export default function Index() {
   const { classes } = useStyles();
   const { height, width } = useViewportSize();
-  const timeFromCookieTry = getCookie('time');
-  const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : null);
+  const [timeToken, setTimeToken] = useState(getCookie('timeToken') ?? 0);
   const [formattedTime, setFormattedTime] = useState('');
   const [viewportSize, setViewportSize] = useState({ height: 0, width: 0 });
 
   const feed = () => {
-    const now = dayjs();
-    setTime(now);
-    setCookies('time', now.toJSON(), { expires: now.add(30, 'd').toDate() });
+    const newTimeToken = getTimeToken(dayjs());
+    setTimeToken(newTimeToken);
+    setCookies('timeToken', newTimeToken, { expires: dayjs().add(30, 'd').toDate() });
   }
 
-  useEffect(() => setFormattedTime(formatTime(time)), [time])
+  useEffect(() => setFormattedTime(formatTime(timeToken)), [timeToken])
   useEffect(() => setViewportSize({ width, height }), [height, width])
 
   return <>
