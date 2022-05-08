@@ -41,12 +41,11 @@ const formatTime = time => {
 
 export default function Index() {
   const { classes } = useStyles();
-  const { width, height } = useViewportSize();
+  const { height, width } = useViewportSize();
   const timeFromCookieTry = getCookie('time');
   const [time, setTime] = useState(timeFromCookieTry ? dayjs(timeFromCookieTry) : null);
   const [formattedTime, setFormattedTime] = useState('');
-  const [viewportWidth, setViewportWidth] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(0);
+  const [viewportSize, setViewportSize] = useState({ height: 0, width: 0 });
 
   const feed = () => {
     const now = dayjs();
@@ -55,15 +54,14 @@ export default function Index() {
   }
 
   useEffect(() => setFormattedTime(formatTime(time)), [time])
-  useEffect(() => setViewportHeight(height), [height])
-  useEffect(() => setViewportWidth(width), [width])
+  useEffect(() => setViewportSize({ width, height }), [height, width])
 
   return <>
-    <div className={classes.wrapper} style={{ width: viewportWidth, height: viewportHeight, overflow: 'hidden' }}>
+    <div className={classes.wrapper} style={{ height: viewportSize.height, width: viewportSize.width, overflow: 'hidden' }}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />
       <div className={classes.inner}>
-        <Box style={{ height: viewportHeight / 5 }} />
-        <Box style={{ height: viewportHeight / 5 }}>
+        <Box style={{ height: viewportSize.height / 5 }} />
+        <Box style={{ height: viewportSize.height / 5 }}>
           <Title className={classes.title}>
             Le chien a mangé{' '}
             <Text component="span" inherit className={classes.highlight}>
@@ -71,15 +69,14 @@ export default function Index() {
             </Text>
           </Title>
         </Box>
-        <Box style={{ height: viewportHeight / 5 }} />
-        <Box style={{ height: viewportHeight / 5, margin: 'auto', textAlign: 'center' }}>
+        <Box style={{ height: viewportSize.height / 5 }} />
+        <Box style={{ margin: 'auto', textAlign: 'center' }}>
           <Button variant="white" size="xl" onClick={feed} px={100}>
             <Text size='xl'>
               Nourrir le chien
             </Text>
           </Button>
         </Box>
-        <Box style={{ height: viewportHeight / 5 }} />
       </div>
     </div>
   </>
