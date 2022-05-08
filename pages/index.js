@@ -58,7 +58,7 @@ export default function Index() {
 
   return <>
     <div className={classes.wrapper} style={{ height: viewportSize.height, width: viewportSize.width, overflow: 'hidden' }}>
-      <Overlay color="#000" opacity={0.65} zIndex={1} />
+      <Overlay color="#000" opacity={0.65} zIndex={1} style={{ height: viewportSize.height, width: viewportSize.width }} />
       <div className={classes.inner}>
         <Box style={{ height: viewportSize.height / 5 }} />
         <Box style={{ height: viewportSize.height / 5 }}>
