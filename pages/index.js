@@ -64,15 +64,9 @@ export default function Index() {
   useEffect(() => setViewportSize({ width, height }), [height, width]);
 
   return <>
-    <div
-      className={classes.wrapper}
-      style={{ height: viewportSize.height, width: viewportSize.width }}
-    >
-      <Overlay color="#000" opacity={0.65} zIndex={1} style={{ height: viewportSize.height, width: viewportSize.width }} />
-      <div
-        className={classes.inner}
-        style={{ height: viewportSize.height, width: viewportSize.width }}
-      >
+    <div className={classes.wrapper} style={viewportSize}>
+      <Overlay color="#000" opacity={0.65} zIndex={1} style={viewportSize} />
+      <div className={classes.inner} style={viewportSize}>
         <Box style={{ height: viewportSize.height / 5 }} />
         <Box style={{ height: viewportSize.height / 5 }}>
           <Title className={classes.title}>
