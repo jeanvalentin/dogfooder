@@ -3,7 +3,7 @@ import { useViewportSize } from '@mantine/hooks';
 import { getCookie, setCookies } from 'cookies-next';
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -51,6 +51,7 @@ export default function Index() {
   const [nextMealTime, setNextMealTime] = useState(dayjs(getCookie('nextMealTime') ?? dayjs()));
   const [viewportSize, setViewportSize] = useState({ height: 0, width: 0 });
   const [dogIsHungry, setDogIsHungry] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState(dayjs());
 
   const feed = () => {
     const now = dayjs();
@@ -65,14 +66,18 @@ export default function Index() {
     setCookies('nextMealTime', newNextMealTime.toJSON(), { expires: dayjs().add(30, 'd').toDate() });
   };
 
+  const doUpdate = useCallback(() => {
+    const now = dayjs();
+    setDogIsHungry(nextMealTime.isBefore(now));
+    setLastUpdate(now);
+  }, [nextMealTime]);
+
   useEffect(() => setViewportSize({ width, height }), [height, width]);
   useEffect(() => {
-    setDogIsHungry(nextMealTime.isBefore(dayjs()));
-    const interval = setInterval(() => {
-      setDogIsHungry(nextMealTime.isBefore(dayjs()));
-    }, 120000);
+    doUpdate();
+    const interval = setInterval(doUpdate, 60000);
     return () => clearInterval(interval);
-  }, [nextMealTime]);
+  }, [doUpdate]);
 
   return <>
     <div className={classes.wrapper} style={viewportSize}>
@@ -97,6 +102,11 @@ export default function Index() {
               <Text size="xl">En fait non</Text>
             </Button>}
         </Box>
+        <div style={{ position: 'absolute', bottom: 8, left: 8 }}>
+          <Text>
+            {lastUpdate.format('HH:mm')}
+          </Text>
+        </div>
         <div style={{ position: 'absolute', bottom: 8, right: 8 }}>
           <Link href="https://github.com/jeanvalentin/dogfooder">
             <a>
