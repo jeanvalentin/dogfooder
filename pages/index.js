@@ -52,6 +52,7 @@ export default function Index() {
   const [viewportSize, setViewportSize] = useState({ height: 0, width: 0 });
   const [dogIsHungry, setDogIsHungry] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(dayjs());
+  const [lastMealDay, setLastMealDay] = useState(formatTime(0));
 
   const feed = () => {
     const now = dayjs();
@@ -73,6 +74,7 @@ export default function Index() {
   }, [nextMealTime]);
 
   useEffect(() => setViewportSize({ width, height }), [height, width]);
+  useEffect(() => setLastMealDay(formatTime(getTimeToken(nextMealTime))), [nextMealTime]);
   useEffect(() => {
     doUpdate();
     const interval = setInterval(doUpdate, 60000);
@@ -87,7 +89,7 @@ export default function Index() {
         <Box style={{ height: viewportSize.height / 5 }}>
           <Title className={classes.title}>
             <Text component="span" inherit className={dogIsHungry ? classes.hungry : classes.nothungry}>
-              {dogIsHungry ? `Le chien n'a pas mangé !` : `Le chien a mangé ${formatTime(getTimeToken(nextMealTime))}.`}
+              {dogIsHungry ? `Le chien n'a pas mangé !` : `Le chien a mangé ${lastMealDay}.`}
             </Text>
           </Title>
         </Box>
