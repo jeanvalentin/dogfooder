@@ -55,7 +55,7 @@ export default function Index() {
 
   const feed = () => {
     const now = dayjs();
-    const newNextMealTime = now.set('h', now.hour < 12 ? 11 : 23).set('m', 59).set('s', 59);
+    const newNextMealTime = now.set('h', now.hour() < 12 ? 11 : 23).set('m', 59).set('s', 59);
     setNextMealTime(newNextMealTime);
     setCookies('nextMealTime', newNextMealTime.toJSON(), { expires: dayjs().add(30, 'd').toDate() });
   };
