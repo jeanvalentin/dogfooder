@@ -8,7 +8,7 @@ Dogfooder is called Dogfooder because of [dogfooding](https://en.wikipedia.org/w
 
 Live: https://dogfooder.surge.sh/
 
-See when the dog was last fed. When you feed the dog, tap the button and it stores the time in a cookie. Do not give cookies to the dog.
+See when the dog was last fed or whether the dog needs to be fed. When you feed the dog, tap the button and it stores the time in a cookie. Do not give cookies to the dog. If you made a mistake, unfeed the dog.
 
 Usage example:
 ![sample_use](sample_use.jpg)
