@@ -23,11 +23,11 @@ __A:__ On your device only. Nothing is stored on the server. In fact, there is n
 
 __Q: Isn't Next.js a bit overkill for that kind of simple application?__
 
-__A:__ Yes.
+__A:__ No
 
 __Q: Isn't Mantine a bit overkill for that kind of simple application?__
 
-__A:__ See above.
+__A:__ Yes
 
 __Q: Why is it in French?__
 
